@@ -7,5 +7,6 @@ const routes = Router();
 
 routes.post("/users", duplicateEmail, userCreateController);
 routes.get("/users", userListController);
+routes.post("/login");
 
 export default routes;
