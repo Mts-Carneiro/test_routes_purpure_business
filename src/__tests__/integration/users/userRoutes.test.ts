@@ -95,10 +95,9 @@ describe("/users", () => {
 
     test("PATCH /users/:id -  should not be able to update another user without authorization",async () => {
         const userLoginResponse = await request(app).post("/login").send(mockedUserLogin);
-        const secondLoginResponse = await request(app).post("/login").send(mockedUserLogin_2);
-        const UserToBePach = await request(app).get('/users').set("Authorization", `Bearer ${secondLoginResponse.body.token}`)
+        const UserToBePach = await request(app).get('/users').set("Authorization", `Bearer ${userLoginResponse.body.token}`)
 
-        const response = await request(app).patch(`/users/${UserToBePach.body[0].id}`).set("Authorization", `Bearer ${userLoginResponse.body.token}`)
+        const response = await request(app).patch(`/users/${UserToBePach.body[0].id}`)
 
         expect(response.body).toHaveProperty("message")
         expect(response.status).toBe(401)
