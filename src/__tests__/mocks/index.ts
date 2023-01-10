@@ -34,35 +34,24 @@ export const newClient = {
 export const newProduct = {
     name: "produto_1",
     value: "10",
-    stock: "5"
+    stock: "5",
+    user: ""
 }
 
+
+export const newProductInvalidUserId = {
+    name: "produto_1",
+    value: "10",
+    stock: "5",
+    user: "5452138748542132212"
+}
+
+
+
 export const newSale = {
-    client: "Jonas",
-    product: "produto_1",
+    client: "",
+    product: "",
+    user: "",
     amout: 5
 }
 
-/* 
-    Users:
-        CNPJ
-        Password
-        Email
-        CommercialName
-
-    Clients:
-        Name
-        Document
-        Email
-        Number
-
-    Products:
-        Name
-        Value
-        Stock
-
-    Sales:
-        client_id
-        product_id
-        amout
-*/

@@ -2,7 +2,7 @@ import  request  from "supertest"
 import { DataSource } from "typeorm"
 import app from "../../../app"
 import { AppDataSource } from "../../../data-source"
-import { mockedAdmin } from "../../mocks" 
+import { mockedUser } from "../../mocks" 
 
 
 
@@ -16,7 +16,7 @@ describe("/login", () => {
             console.error("Error during Data Source initialization", err)
         })
 
-        await request(app).post('/users').send(mockedAdmin)
+        await request(app).post('/users').send(mockedUser)
     })
 
     afterAll(async() => {
@@ -24,7 +24,7 @@ describe("/login", () => {
     })
 
     test("POST /login -  should be able to login with the user",async () => {
-        const response = await request(app).post('/login').send(mockedAdmin)
+        const response = await request(app).post('/login').send(mockedUser)
 
         expect(response.body).toHaveProperty("token")
         expect(response.status).toBe(200)
@@ -33,7 +33,7 @@ describe("/login", () => {
     test("POST /login -  should not be able to login with the user with incorrect password or email", async () => {
 
         const response = await request(app).post("/login").send({
-            email: "felipe@mail.com",
+            email: "joana@mail.com",
             password: "1234"
         })
 
