@@ -28,7 +28,16 @@ export const newClient = {
     name: "Jonas",
     document: "11122233345",
     email: "jonas@mail.com",
-    number: "00912345678"
+    number: "00912345678",
+    user:""
+}
+
+export const newClientInvalidUserId = {
+    name: "Jonas",
+    document: "11122233345",
+    email: "jonas@mail.com",
+    number: "00912345678",
+    user:"5452138748542132212"
 }
 
 export const newProduct = {

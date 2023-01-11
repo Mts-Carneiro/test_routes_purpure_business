@@ -32,7 +32,7 @@ describe("/products",() => {
         const userTobeUpdateRequest = await request(app).get("/users").set("Authorization", token)
     
         newProduct.user = userTobeUpdateRequest.body[0].id
-        const response = await request(app).post("/post").set("Authorization", token).send(newProduct)
+        const response = await request(app).post("/products").set("Authorization", token).send(newProduct)
 
         expect(response.body).toHaveProperty("id")
         expect(response.body).toHaveProperty("name")
@@ -49,7 +49,7 @@ describe("/products",() => {
         const userTobeUpdateRequest = await request(app).get("/users").set("Authorization", token)
     
         newProduct.user = userTobeUpdateRequest.body[0].id
-        const response = await request(app).post("/post").set("Authorization", token).send(newProduct)
+        const response = await request(app).post("/products").set("Authorization", token).send(newProduct)
 
         expect(response.body).toHaveProperty("message")
         expect(response.status).toBe(409)
@@ -59,14 +59,14 @@ describe("/products",() => {
         const responseLogin = await request(app).post('/login').send(mockedUserLogin)
         const token = `Bearer ${responseLogin.body.token}`
 
-        const response = await request(app).post("/post").set("Authorization", token).send(newProductInvalidUserId)
+        const response = await request(app).post("/products").set("Authorization", token).send(newProductInvalidUserId)
 
         expect(response.body).toHaveProperty("message")
         expect(response.status).toBe(404)
     })
 
     test("POST /products - should not be able to create another product without authorization",async () => {
-        const response = await request(app).post("/post").send(newProductInvalidUserId)
+        const response = await request(app).post("/products").send(newProduct)
 
         expect(response.body).toHaveProperty("message")
         expect(response.status).toBe(401)
@@ -76,8 +76,7 @@ describe("/products",() => {
         const getProducts = await request(app).get("/products")
 
         expect(getProducts.body).toHaveProperty("id")
-        expect(getProducts.body).toHaveProperty("cnpj")
-        expect(getProducts.body).toHaveProperty("products")
+        expect(getProducts.body).toHaveLength(1)
         expect(getProducts.status).toBe(200)
     }) 
 
